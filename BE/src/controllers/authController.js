@@ -1,14 +1,14 @@
 const AuthService = require('../service/authService');
-const Response = require('../utils/response');
+const Apirespone = require('../utils/ApiResponse')
 
 class AuthController {
   async login(req, res) {
     try {
       const { username, password } = req.body;
       const result = await AuthService.login(username, password);
-      return Response.success(res, 'Đăng nhập thành công', result);
+      return Apirespone.success(res, 'Đăng nhập thành công', result);
     } catch (error) {
-      return Response.error(res, error.message, 401);
+      return Apirespone.error(res, error.message, 401);
     }
   }
 
@@ -18,9 +18,9 @@ class AuthController {
       if (!refreshToken) throw new Error("Không có refresh token");
 
       const result = await AuthService.refreshToken(refreshToken);
-      return Response.success(res, "Refresh token thành công", result);
+      return Apirespone.success(res, "Refresh token thành công", result);
     } catch (error) {
-      return Response.error(res, error.message, 401);
+      return Apirespone.error(res, error.message, 401);
     }
   }
 
@@ -28,9 +28,9 @@ class AuthController {
     try {
       const userId = req.user.id;
       await AuthService.logout(userId);
-      return Response.success(res, "Đăng xuất thành công");
+      return Apirespone.success(res, "Đăng xuất thành công");
     } catch (error) {
-      return Response.error(res, error.message, 500);
+      return Apirespone.error(res, error.message, 500);
     }
   }
 

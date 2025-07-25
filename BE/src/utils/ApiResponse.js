@@ -1,4 +1,4 @@
-class Response {
+class ApiResponse {
   static success(res, message = 'Thành công', data = {}) {
     return res.status(200).json({
       status: 200,
@@ -14,6 +14,7 @@ class Response {
       error,
     });
   }
+  
 }
 
-module.exports = Response;
+module.exports = ApiResponse;
