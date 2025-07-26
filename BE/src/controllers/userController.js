@@ -35,7 +35,7 @@ async createUser(req,res){
 }
 
 
-async updateUSer(req,res){
+async updateUser(req,res){
   try {
         const { username, password, role } = req.body;
         const{id} = req.params;

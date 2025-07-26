@@ -1,11 +1,11 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
-const JwtUtils = require('../utils/jwt');
+
 
 class UserService{
     async createUser(username, password,role){
         const user = await db.User.findOne({ where: { username } });
-        if (user) throw new Error('Người dùng tồn tại');
+        if (user) throw new Error('user already exists');
 
         const passwordHashed = await this.hashPassword(password);
 
@@ -41,7 +41,7 @@ class UserService{
 
     async getUserByID(id){
         const user = await db.User.findOne({ where: { id: id }, attributes: ['id', 'username', 'role'] })
-        if (!user) throw new Error('Người dùng không tồn tại');
+        if (!user) throw new Error('user does not exist');
         return user;
     }
 
